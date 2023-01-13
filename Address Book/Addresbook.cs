@@ -113,7 +113,7 @@ namespace Address_Book
         {
             Console.WriteLine("Enter Name to delete contact");
             string name= Console.ReadLine();
-            foreach( Contact record in arrayList)
+            foreach(Contact record in arrayList)
             {
                 if(record.Firstname==name)
                 {
