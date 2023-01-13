@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -105,6 +106,21 @@ namespace Address_Book
                     Console.WriteLine("Name does not exist");
                     Console.ResetColor();
                 }
+            }
+           
+        }
+        public void DeleteContact()
+        {
+            Console.WriteLine("Enter Name to delete contact");
+            string name= Console.ReadLine();
+            foreach( Contact record in arrayList)
+            {
+                if(record.Firstname==name)
+                {
+                    arrayList.Remove(record);
+                    Console.WriteLine("Contact delete succesfully");
+                }
+                
             }
         }
     }
