@@ -10,7 +10,8 @@ namespace Address_Book
 {
     public class Addresbook
     {
-        ArrayList arrayList = new ArrayList();
+        private Dictionary<string, Contact> addressbook = new Dictionary<string, Contact>();
+        private Dictionary<string, Addresbook> addressBookDictionary = new Dictionary<string, Addresbook>();
         public void CreateContact()
         {
             Contact Contact = new Contact();
@@ -30,30 +31,49 @@ namespace Address_Book
             Contact.Phone = Convert.ToInt64(Console.ReadLine());
             Console.WriteLine("Enter MailId");
             Contact.Email = Console.ReadLine();
-            arrayList.Add(Contact);
+            addressbook.Add(Contact.Firstname, Contact);
         }
         public void DisplayContact()
         {
             Console.WriteLine("*****Contact****");
-            foreach (Contact records in arrayList)
+            foreach (KeyValuePair<string,Contact> item in addressbook)
             {
-                Console.WriteLine("First Name -" + records.Firstname);
-                Console.WriteLine("Last Name -" + records.Lastname);
-                Console.WriteLine("Address -" + records.Address);
-                Console.WriteLine("City -" + records.City);
-                Console.WriteLine("State -" + records.State);
-                Console.WriteLine("Zip -" + records.Zip);
-                Console.WriteLine("Phone Number -" + records.Phone);
-                Console.WriteLine("Email -" + records.Email);
+                Console.WriteLine("First Name -" + item.Value.Firstname);
+                Console.WriteLine("Last Name -" + item.Value.Lastname);
+                Console.WriteLine("Address -" + item.Value.Address);
+                Console.WriteLine("City -" + item.Value.City);
+                Console.WriteLine("State -" + item.Value.State);
+                Console.WriteLine("Zip -" + item.Value.Zip);
+                Console.WriteLine("Phone Number -" + item.Value.Phone);
+                Console.WriteLine("Email -" + item.Value.Email);
+            }
+        }
+        public void ViewContact()
+        {
+            Console.WriteLine("Enter Name for view contact");
+            string name = Console.ReadLine();
+            foreach (KeyValuePair<string, Contact> item in addressbook)
+            {
+                if (item.Key.Equals(name))
+                {
+                    Console.WriteLine("First Name : " + item.Value.Firstname);
+                    Console.WriteLine("Last Name : " + item.Value.Lastname);
+                    Console.WriteLine("Address : " + item.Value.Address);
+                    Console.WriteLine("City : " + item.Value.City);
+                    Console.WriteLine("State : " + item.Value.State);
+                    Console.WriteLine("Email : " + item.Value.Email);
+                    Console.WriteLine("Zip : " + item.Value.Zip);
+                    Console.WriteLine("Phone Number : " + item.Value.Phone + "\n");
+                }
             }
         }
         public void EditContact()
         {
             Console.WriteLine("To Edit contact enter contact firstname");
             string name = Console.ReadLine();
-            foreach (Contact record in arrayList)
+            foreach (KeyValuePair<string, Contact> item in addressbook)
             {
-                if (record.Firstname == name)
+                if (item.Value.Firstname == name)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine(name + " is exist");
@@ -65,37 +85,37 @@ namespace Address_Book
                         case 1:
                             Console.WriteLine("Enter new lastname");
                             string newLastname = Console.ReadLine();
-                            record.Lastname = newLastname;
+                            item.Value.Lastname = newLastname;
                             break;
                         case 2:
                             Console.WriteLine("Enter New Address ");
                             string newAddress = Console.ReadLine();
-                            record.Address = newAddress;
+                            item.Value.Address = newAddress;
                             break;
                         case 3:
                             Console.WriteLine("Enter New City ");
                             string newCity = Console.ReadLine();
-                            record.City = newCity;
+                            item.Value.City = newCity;
                             break;
                         case 4:
                             Console.WriteLine("Enter New State ");
                             string newState = Console.ReadLine();
-                            record.State = newState;
+                            item.Value.State = newState;
                             break;
                         case 5:
                             Console.WriteLine("Enter New Zip ");
                             long newZip = Convert.ToInt64(Console.ReadLine());
-                            record.Zip = newZip;
+                            item.Value.Zip = newZip;
                             break;
                         case 6:
                             Console.WriteLine("Enter New PhoneNumber ");
                             long newPhone = Convert.ToInt64(Console.ReadLine());
-                            record.Phone = newPhone;
+                            item.Value.Phone = newPhone;
                             break;
                         case 7:
                             Console.WriteLine("Enter New Email ");
                             string newEmail = Console.ReadLine();
-                            record.Email = newEmail;
+                            item.Value.Email = newEmail;
                             break;
 
                     }
@@ -113,15 +133,21 @@ namespace Address_Book
         {
             Console.WriteLine("Enter Name to delete contact");
             string name= Console.ReadLine();
-            foreach(Contact record in arrayList)
+            if (addressbook.ContainsKey(name))
             {
-                if(record.Firstname==name)
-                {
-                    arrayList.Remove(record);
-                    Console.WriteLine("Contact delete succesfully");
-                }
-                
+                addressbook.Remove(name);
+                Console.WriteLine("\nContact Deleted Succesfully..\n");
             }
+            else
+            {
+                Console.WriteLine("\nContact Not Found, Try Again..\n");
+            }
+        }
+        public void AddAddressBook(string bookName)
+        {
+            Addresbook addressBook = new Addresbook();
+            addressBookDictionary.Add(bookName, addressBook);
+            Console.WriteLine("AddressBook Created.");
         }
     }
 }
