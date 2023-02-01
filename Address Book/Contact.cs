@@ -1,13 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Address_Book
 {
-    internal class Contact
+    public class Contact
     {
+        public Contact(string firstName, string lastName, string address, string city, string state, string email, int zip, long phoneNum)
+        {
+            Firstname = firstName;
+            Lastname = lastName;
+            Address = address;
+            City = city;
+            State = state;
+            Email = email;
+            Zip = zip;
+        }
+
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Address { get; set; }
@@ -17,4 +29,5 @@ namespace Address_Book
         public long Phone { get; set; }
         public string Email { get; set; }
     }
+    
 }

@@ -15,8 +15,31 @@ namespace Address_Book
                 switch (choice)
                 {
                     case 1:
-                        book.CreateContact();
+                        Console.WriteLine("Enter FirstName");
+                        string FirstName = Console.ReadLine();
+                        Console.WriteLine("Enter LastName");
+                        string LastName = Console.ReadLine();
+                        Contact contact = new Contact(FirstName, LastName, null, null, null, null, 0, 0);
+                        if (book.CheckDuplicateEntry(contact, bookName))
+                        {
+                            break;
+                        }
+                        Console.WriteLine("Enter Address");
+                        string Address = Console.ReadLine();
+                        Console.WriteLine("Enter City");
+                        string City = Console.ReadLine();
+                        Console.WriteLine("Enter State");
+                        string State = Console.ReadLine();
+                        Console.WriteLine("Enter Zip");
+                        int Zip = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Enter Eamil");
+                        string Email = Console.ReadLine();
+                        Console.WriteLine("Enter PhoneNumber");
+                        long PhoneNum = Convert.ToInt64(Console.ReadLine());
+                        book.CreateContact(FirstName, LastName, Address, City, State, Email, Zip, PhoneNum, bookName);
                         break;
+                       
+                        
                     case 2:
                         book.DisplayContact(); 
                         break;

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Address_Book
 {
@@ -12,26 +13,14 @@ namespace Address_Book
     {
         private Dictionary<string, Contact> addressbook = new Dictionary<string, Contact>();
         private Dictionary<string, Addresbook> addressBookDictionary = new Dictionary<string, Addresbook>();
-        public void CreateContact()
+
+        public void CreateContact(string firstName, string lastName, string address, string city, string state, string email, int zip, long phoneNum, string BookName)
         {
-            Contact Contact = new Contact();
-            Console.WriteLine("Enter FirstName");
-            Contact.Firstname = Console.ReadLine();
-            Console.WriteLine("Enter LastName");
-            Contact.Lastname = Console.ReadLine();
-            Console.WriteLine("Enter Address");
-            Contact.Address = Console.ReadLine();
-            Console.WriteLine("Enter City");
-            Contact.City = Console.ReadLine();
-            Console.WriteLine("Enter State");
-            Contact.State = Console.ReadLine();
-            Console.WriteLine("Enter Zip");
-            Contact.Zip = Convert.ToInt64(Console.ReadLine());
-            Console.WriteLine("Enter PhoneNumber");
-            Contact.Phone = Convert.ToInt64(Console.ReadLine());
-            Console.WriteLine("Enter MailId");
-            Contact.Email = Console.ReadLine();
-            addressbook.Add(Contact.Firstname, Contact);
+            Contact contact = new Contact(firstName, lastName, address, city, state, email, zip, phoneNum);
+
+            addressBookDictionary[BookName].addressbook.Add(contact.Firstname, contact);
+            Console.WriteLine("Added Succesfully");
+
         }
         public void DisplayContact()
         {
@@ -149,5 +138,30 @@ namespace Address_Book
             addressBookDictionary.Add(bookName, addressBook);
             Console.WriteLine("AddressBook Created.");
         }
+        public Dictionary<string, Addresbook> GetaddressBook()
+        {
+            return addressBookDictionary;
+        }
+        public List<Contact> GetListOfDictionaryKeys(string bookName)
+        {
+            List<Contact> contacts = new List<Contact>();
+            foreach (var value in addressBookDictionary[bookName].addressbook.Values)
+            {
+                contacts.Add(value);
+            }
+            return contacts;
+        }
+        public bool CheckDuplicateEntry(Contact check, string bookName)
+        {
+            List<Contact> contacts = GetListOfDictionaryKeys(bookName);
+            if (contacts.Any(b => b.Equals(check)))
+            {
+                Console.WriteLine("Name Already Exist");
+                return true;
+            }
+            return false;
+        }
+
+
     }
 }
