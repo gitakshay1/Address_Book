@@ -196,6 +196,36 @@ namespace Address_Book
                 }
             }
         }
+        public void CountbyCity()
+        {
+            Console.WriteLine(" Enter city ");
+            string CityName = Console.ReadLine();
+            int count = 0;
+            foreach (Addresbook addressbookobj in addressBookDictionary.Values)
+            {
+                List<Contact> contactList = GetListOfDictctionaryKeys2(addressbookobj.addressbook);
+                foreach (Contact contact in contactList.FindAll(c => c.City.Equals(CityName)).ToList())
+                {
+                    count++;
+                }
+            }
+            Console.WriteLine(count + " person are in " + CityName);
+        }
+        public void CountbyState()
+        {
+            Console.WriteLine(" Enter state ");
+            string stateName = Console.ReadLine();
+            int count = 0;
+            foreach (Addresbook addressbookobj in addressBookDictionary.Values)
+            {
+                List<Contact> contactList = GetListOfDictctionaryKeys2(addressbookobj.addressbook);
+                foreach (Contact contact in contactList.FindAll(c => c.City.Equals(stateName)).ToList())
+                {
+                    count++;
+                }
+            }
+            Console.WriteLine(count + " person are in " + stateName);
+        }
 
     }
 }

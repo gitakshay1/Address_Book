@@ -83,6 +83,24 @@ namespace Address_Book
                                 break;
                         }
                         break;
+                    case 8:
+                        Console.WriteLine("Would You Like To \n1. Count by city \n2.Count by state");
+                        int opti = Convert.ToInt32(Console.ReadLine());
+                        switch (opti)
+                        {
+                            case 1:
+
+                                book.CountbyCity();
+                                break;
+                            case 2:
+
+                                book.CountbyState();
+                                break;
+                            default:
+                                Console.WriteLine("Invalid Input.Enter 1 or 2");
+                                break;
+                        }
+                        break;
                     case 0:
                         Console.WriteLine("Thank you for using app");
                         break;
