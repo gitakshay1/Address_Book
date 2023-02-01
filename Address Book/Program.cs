@@ -7,11 +7,12 @@ namespace Address_Book
         {
             Addresbook book = new Addresbook();
             string bookName = "default";
-            while (true)
+            int choice = 1;
+            while (choice!=0)
             {
                 Console.WriteLine("1.Create Contact\n2 Display Contact\n3 Edit Contact\n4 Delete Contact\n5 Search Contact by name" +
-                    "\n6 Create new address book");
-                int choice = Convert.ToInt32(Console.ReadLine());
+                    "\n6 Create new address book\n7 Search contats by City/State\n0 exit app");
+                choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
                     case 1:
@@ -64,6 +65,28 @@ namespace Address_Book
                             bookName = newAddressBook;
                         }
                         break;
+                    case 7:
+                        Console.WriteLine("Would You Like To \n1.Search by city \n2.Search by state");
+                        int opt = Convert.ToInt32(Console.ReadLine());
+                        switch (opt)
+                        {
+                            case 1:
+                               
+                                book.searchCity();
+                                break;
+                            case 2:
+                                
+                                book.SearchPersonByState();
+                                break;
+                            default:
+                                Console.WriteLine("Invalid Input.Enter 1 or 2");
+                                break;
+                        }
+                        break;
+                    case 0:
+                        Console.WriteLine("Thank you for using app");
+                        break;
+
 
 
                 }

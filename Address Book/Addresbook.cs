@@ -161,7 +161,41 @@ namespace Address_Book
             }
             return false;
         }
-
+        public List<Contact> GetListOfDictctionaryKeys2(Dictionary<string, Contact> d)
+        {
+            List<Contact> book = new List<Contact>();
+            foreach (var value in d.Values)
+            {
+                book.Add(value);
+            }
+            return book;
+        }
+        public void searchCity()
+        {
+            Console.WriteLine("Enter City name");
+            string CityName=Console.ReadLine();
+            foreach (Addresbook addressbookobj in addressBookDictionary.Values)
+            {
+                List<Contact> contactList = GetListOfDictctionaryKeys2(addressbookobj.addressbook);
+                foreach (Contact contact in contactList.FindAll(c => c.City.Equals(CityName)).ToList())
+                {
+                    Console.WriteLine(contact.ToString());
+                }
+            }
+        }
+        public void SearchPersonByState()
+        {
+            Console.WriteLine("Enter State name");
+            string StateName = Console.ReadLine();
+            foreach (Addresbook addressbookobj in addressBookDictionary.Values)
+            {
+                List<Contact> contactList = GetListOfDictctionaryKeys2(addressbookobj.addressbook);
+                foreach (Contact contact in contactList.FindAll(c => c.State.Equals(StateName)).ToList())
+                {
+                    Console.WriteLine(contact.ToString());
+                }
+            }
+        }
 
     }
 }
