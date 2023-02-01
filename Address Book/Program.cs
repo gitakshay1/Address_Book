@@ -86,13 +86,9 @@ namespace Address_Book
                     case 0:
                         Console.WriteLine("Thank you for using app");
                         break;
-
-
-
                 }
 
             }
-
 
         }
     }
