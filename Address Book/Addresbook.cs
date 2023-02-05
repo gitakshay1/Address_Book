@@ -226,6 +226,18 @@ namespace Address_Book
             }
             Console.WriteLine(count + " person are in " + stateName);
         }
+        public void SortByName()
+        {
+            foreach (Addresbook addressBookobj in addressBookDictionary.Values)
+            {
+                List<string> list = addressBookobj.addressbook.Keys.ToList();
+                list.Sort();
+                foreach (string name in list)
+                {
+                    Console.WriteLine(addressBookobj.addressbook[name].ToString());
+                }
+            }
+        }
 
     }
 }
