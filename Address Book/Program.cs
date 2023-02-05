@@ -11,7 +11,7 @@ namespace Address_Book
             while (choice!=0)
             {
                 Console.WriteLine("1.Create Contact\n2 Display Contact\n3 Edit Contact\n4 Delete Contact\n5 Search Contact by name" +
-                    "\n6 Create new address book\n7 Search contats by City/State\n8 Count Contact by City/State\n9 Sort contact by Name\n0 exit app");
+                    "\n6 Create new address book\n7 Search contats by City/State\n8 Count Contact by City/State\n9 Sort contact by Name/City/State/zip\n0 exit app");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -102,7 +102,26 @@ namespace Address_Book
                         }
                         break;
                     case 9:
-                        book.SortByName();
+                        Console.WriteLine("\n1.Sort By Name \n2.Sort By City \n3.Sort By State \n4.Sort By Zip");
+                        int ch = Convert.ToInt32(Console.ReadLine());
+                        switch (ch)
+                        {
+                            case 1:
+                                book.SortByName();
+                                break;
+                            case 2:
+                                book.SortByCity();
+                                break;
+                            case 3:
+                                book.SortByState();
+                                break;
+                            case 4:
+                                book.SortByZip();
+                                break;
+                            default:
+                                Console.WriteLine("Invalid Choice");
+                                break;
+                        }
                         break;
                     case 0:
                         Console.WriteLine("Thank you for using app");

@@ -13,6 +13,8 @@ namespace Address_Book
     {
         private Dictionary<string, Contact> addressbook = new Dictionary<string, Contact>();
         private Dictionary<string, Addresbook> addressBookDictionary = new Dictionary<string, Addresbook>();
+        private Dictionary<Contact, string> cityDictionary = new Dictionary<Contact, string>();
+        private Dictionary<Contact, string> stateDictionary = new Dictionary<Contact, string>();
 
         public void CreateContact(string firstName, string lastName, string address, string city, string state, string email, int zip, long phoneNum, string BookName)
         {
@@ -238,6 +240,79 @@ namespace Address_Book
                 }
             }
         }
+        public void CreateCityDictionary()
+        {
+            foreach (Addresbook addressBookObj in addressBookDictionary.Values)
+            {
+                foreach (Contact contact in addressBookObj.addressbook.Values)
+                {
+                    addressBookObj.cityDictionary.Add(contact, contact.City);
+                }
+            }
+        }
 
+        public void CreateStateDictionary()
+        {
+            foreach (Addresbook addressBookObj in addressBookDictionary.Values)
+            {
+                foreach (Contact contact in addressBookObj.addressbook.Values)
+                {
+                    addressBookObj.stateDictionary.Add(contact, contact.State);
+                }
+            }
+        }
+        public void SortByCity()
+        {
+            CreateCityDictionary();
+            Dictionary<string, Contact> inverseCityDictionary = new Dictionary<string, Contact>();
+            foreach (Addresbook obj in addressBookDictionary.Values)
+            {
+                foreach (Contact contact in obj.cityDictionary.Keys)
+                {
+                    inverseCityDictionary.TryAdd(contact.City, contact);
+                }
+            }
+            List<string> list = inverseCityDictionary.Keys.ToList();
+            list.Sort();
+            foreach (string city in list)
+            {
+                Console.WriteLine(inverseCityDictionary[city].ToString());
+            }
+        }
+
+        public void SortByState()
+        {
+            CreateStateDictionary();
+            Dictionary<string, Contact> inverseStateDictionary = new Dictionary<string, Contact>();
+            foreach (Addresbook obj in addressBookDictionary.Values)
+            {
+                foreach (Contact contact in obj.stateDictionary.Keys)
+                {
+                    inverseStateDictionary.TryAdd(contact.State, contact);
+                }
+            }
+            List<string> list = inverseStateDictionary.Keys.ToList();
+            list.Sort();
+            foreach (string state in list)
+            {
+                Console.WriteLine(inverseStateDictionary[state].ToString());
+            }
+        }
+
+        public void SortByZip()
+        {
+            SortedList<int, Contact> sortedbyCity = new SortedList<int, Contact>();
+            foreach (Addresbook addressBookobj in addressBookDictionary.Values)
+            {
+                foreach (Contact contact in addressBookobj.addressbook.Values)
+                {
+                    sortedbyCity.Add((int)contact.Zip, contact);
+                }
+            }
+            foreach (var item in sortedbyCity)
+            {
+                Console.WriteLine(item.Value.ToString());
+            }
+        }
     }
 }
