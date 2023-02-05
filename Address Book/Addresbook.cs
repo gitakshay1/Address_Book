@@ -11,16 +11,16 @@ namespace Address_Book
 {
     public class Addresbook
     {
-        private Dictionary<string, Contact> addressbook = new Dictionary<string, Contact>();
-        private Dictionary<string, Addresbook> addressBookDictionary = new Dictionary<string, Addresbook>();
-        private Dictionary<Contact, string> cityDictionary = new Dictionary<Contact, string>();
-        private Dictionary<Contact, string> stateDictionary = new Dictionary<Contact, string>();
+        public Dictionary<string, Contact> addressbook = new Dictionary<string, Contact>();
+        public Dictionary<string, Addresbook> addressBookDictionary = new Dictionary<string, Addresbook>();
+        public Dictionary<Contact, string> cityDictionary = new Dictionary<Contact, string>();
+        public Dictionary<Contact, string> stateDictionary = new Dictionary<Contact, string>();
 
-        public void CreateContact(string firstName, string lastName, string address, string city, string state, string email, int zip, long phoneNum, string BookName)
+        public void CreateContact(string firstName, string lastName, string address, string city, string state, string email, int zip, long phoneNum, string bookName)
         {
             Contact contact = new Contact(firstName, lastName, address, city, state, email, zip, phoneNum);
 
-            addressBookDictionary[BookName].addressbook.Add(contact.Firstname, contact);
+            addressbook.Add(contact.Firstname, contact);
             Console.WriteLine("Added Succesfully");
 
         }

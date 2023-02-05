@@ -11,7 +11,7 @@ namespace Address_Book
             while (choice!=0)
             {
                 Console.WriteLine("1.Create Contact\n2 Display Contact\n3 Edit Contact\n4 Delete Contact\n5 Search Contact by name" +
-                    "\n6 Create new address book\n7 Search contats by City/State\n8 Count Contact by City/State\n9 Sort contact by Name/City/State/zip\n0 exit app");
+                    "\n6 Create new address book\n7 Search contats by City/State\n8 Count Contact by City/State\n9 Sort contact by Name/City/State/zip\n10 Read and Write by using file I/O\n0 exit app");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -122,6 +122,30 @@ namespace Address_Book
                                 Console.WriteLine("Invalid Choice");
                                 break;
                         }
+                        break;
+                    case 10:
+                        Console.WriteLine("Enter Address book name");
+                        bookName = Console.ReadLine();
+                        Console.WriteLine("Enter FirstName");
+                        FirstName = Console.ReadLine();
+                        Console.WriteLine("Enter LastName");
+                        LastName = Console.ReadLine();
+                        Console.WriteLine("Enter Address");
+                        Address = Console.ReadLine();
+                        Console.WriteLine("Enter City");
+                        City = Console.ReadLine();
+                        Console.WriteLine("Enter State");
+                        State = Console.ReadLine();
+                        Console.WriteLine("Enter Zip");
+                        Zip = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Enter Eamil");
+                        Email = Console.ReadLine();
+                        Console.WriteLine("Enter PhoneNumber");
+                        PhoneNum = Convert.ToInt64(Console.ReadLine());
+                        book.CreateContact(FirstName, LastName, Address, City, State, Email, Zip, PhoneNum, bookName);
+                        FileIO fileIO = new FileIO();
+                        fileIO.WriteToFile(book.addressbook);
+                        fileIO.ReadFromFile();
                         break;
                     case 0:
                         Console.WriteLine("Thank you for using app");
